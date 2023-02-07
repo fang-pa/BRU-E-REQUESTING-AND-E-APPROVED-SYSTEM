@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors())
 
 // เชื่อม Database 
-mongoose.connect('mongodb+srv://fangfoe:1234@requesting.mnd6i4r.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.DB_Connection,
     { useNewUrlParser: true, useUnifiedTopology: true },
     (err) => {
         if (err) console.log(err)
