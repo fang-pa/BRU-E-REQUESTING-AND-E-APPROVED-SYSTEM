@@ -11,9 +11,14 @@ See [MongoDB](https://www.mongodb.com/try/download/community).
 npm install -g @vue/cli
 ```
 
-## Project setup
+## frontend setup
 ```
 npm i
+```
+
+## backend setup
+```
+npm i --force
 ```
 
 ## uninstall package
@@ -21,10 +26,10 @@ npm i
 npm uninstall 
 ```
 
-### start project
+## start project
 ```
 npm run dev
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Vue Cli
+See [Vue Cli](https://cli.vuejs.org/config/).
