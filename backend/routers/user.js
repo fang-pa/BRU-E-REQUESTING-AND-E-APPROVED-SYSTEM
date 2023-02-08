@@ -20,7 +20,6 @@ router.post('/login', async (req, res) => {
                         expiresIn: "5h"
                     }
                 )
-                
                 return res.status(200).json(user)
             }else {
                 user.token = jwt.sign(
@@ -50,7 +49,7 @@ router.post('/regis', async (req, res) => {
         }
         //เข้ารหัส password
         user.password = await bcrypt.hash(user.password, 10)
-        //insert to database
+
         res.status(200).json(await Users.create(user))
     } catch (err) {
         console.log(err)
@@ -59,7 +58,7 @@ router.post('/regis', async (req, res) => {
 
 router.get("/employee", async (req, res) => {
     try {
-        res.status(200).json(await Users.find({ role: { $ne: '6312242b6a269505fcb4aa52' } }))
+        res.status(200).json(await Users.find({ role: { $ne: '63e302311b7d5e615a32000d' } }))
     } catch (err) {
         console.log(err);
     }
