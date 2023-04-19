@@ -13,7 +13,7 @@ const UserSchema = mongoose.Schema({
   major: { type: mongoose.Schema.Types.ObjectId ,ref:'major',autopopulate: true },
   group: { type: 'string' },
   joined:{ type: "Date" },
-  role: { type: mongoose.Schema.Types.ObjectId , ref:'role', autopopulate: true},
+  role: { type: "string"},
   token: { type: "string" },
   lineToken: {
     token: { type: "string" },

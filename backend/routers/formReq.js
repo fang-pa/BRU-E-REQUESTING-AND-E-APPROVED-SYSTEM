@@ -1,6 +1,6 @@
 const express = require("express");
 const axios = require("axios");
-const queryString = require('query-string');
+const queryString = import('query-string')
 const router = express.Router();
 const Form = require("../models/FormRequest")
 const auth = require('../middleware/auth');
@@ -276,7 +276,6 @@ router.put('/req_decide/:id', auth, async (req, res) => {
                         return res.status(200).json()
                     }
                     count = 0
-
                 }
             } else if (req.user.role == 'DirectorOfRegistration') {
                 if (docInfo.status == 'yes') {

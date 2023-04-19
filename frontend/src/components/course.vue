@@ -466,8 +466,7 @@ export default {
 };
 </script>
 
-<style scoped>
-@import url(vue-multiselect/dist/vue-multiselect.css);
+<style scoped src="vue-multiselect/dist/vue-multiselect.min.css">
 @import "v-calendar/dist/style.css";
 
 body {
