@@ -39,7 +39,7 @@
             <tr v-for="emp in showEmployee" :key="emp._id">
               <td class="px-2 py-2">{{ emp.userID }}</td>
               <td class="px-2 py-2">{{ emp.name }} {{ emp.surName }}</td>
-              <td class="px-2 py-2">{{ emp.role.roleTh }}</td>
+              <td class="px-2 py-2">{{ emp.role }}</td>
               <td class="px-2 py-2">
                 <a
                   @click="sendData(emp._id)"

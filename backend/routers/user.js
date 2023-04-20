@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
         if (user && (await bcrypt.compare(password, user.password))) {
             if (user.role.role == 'Student') {
                 user.token = jwt.sign(
-                    { _id: user._id, userID: userID, name: user.name, surname: user.surName, role: user.role.role, major: user.major._id, dateTime: new Date(Date.now()), classOf: user.classOf },
+                    { _id: user._id, userID: userID, name: user.name, surname: user.surName, role: user.role, major: user.major._id, dateTime: new Date(Date.now()), classOf: user.classOf },
                     "" + process.env.JWT_KEY,
                     {
                         expiresIn: "5h"
@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
                 return res.status(200).json(user)
             }else {
                 user.token = jwt.sign(
-                    { _id: user._id, userID: userID, name: user.name, surname: user.surName, role: user.role.role},
+                    { _id: user._id, userID: userID, name: user.name, surname: user.surName, role: user.role},
                     "" + process.env.JWT_KEY,
                     {
                         expiresIn: "5h"

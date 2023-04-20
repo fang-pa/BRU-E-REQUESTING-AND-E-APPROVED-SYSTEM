@@ -1,8 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './routers'
-// import VCalendar from 'v-calendar';
-
+import VCalendar from "v-calendar";
 import './axios'
-// .use(VCalendar, {})
-createApp(App).use(router).mount('#app')
+
+createApp(App).use(router).use(VCalendar).mount('#app')
