@@ -162,9 +162,14 @@
                 </label>
               </div>
             </div>
-            <!-- <label class="input-group input-group-vertical">
+            <label class="input-group input-group-vertical">
               <span>ชื่อรายวิชา</span>
-              <VueMultiselect
+              <multiselect
+              v-model="PrePost.subject"
+              :options="this.options"
+              >
+            </multiselect>
+              <!-- <Multiselect
                 v-model="PrePost.subject"
                 :options="SubJ"
                 :custom-label="subjectWithLang"
@@ -174,11 +179,11 @@
                 track-by="_id"
                 data-theme="light"
               >
-              </VueMultiselect>
+              </Multiselect>
             </label>
             <label class="input-group input-group-vertical">
               <span>ชื่ออาจารย์</span>
-              <VueMultiselect
+              <Multiselect
                 v-model="PrePost.teacher"
                 :options="Teach"
                 :custom-label="teacherWithLang"
@@ -188,8 +193,8 @@
                 track-by="_id"
                 data-theme="light"
               >
-              </VueMultiselect>
-            </label> -->
+              </Multiselect> -->
+            </label>
             <a class="rounded-full btn btn-info mb-2 ml-auto" @click="addPre()">
               เพิ่มแผนรายวิชา
             </a>
@@ -308,14 +313,15 @@
 <script>
 import axios from "axios";
 import swal from "sweetalert2";
-// import Multiselect from 'vue-multiselect'
+import Multiselect from 'vue-multiselect'
 import moment from "moment";
 
 export default {
   name: "CoursE",
-  // components: { Multiselect },
+  components: { Multiselect },
   data() {
     return {
+      options: ['list', 'of', 'options'],
       courses: {
         major: "",
         course: [
@@ -429,7 +435,8 @@ export default {
 };
 </script>
 
-<style scoped src="vue-multiselect/dist/vue-multiselect.min.css">
+<style src="vue-multiselect/dist/vue-multiselect.min.css" scoped >
+
 body {
   height: 100%;
 }

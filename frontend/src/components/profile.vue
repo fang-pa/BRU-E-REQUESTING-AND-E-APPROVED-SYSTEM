@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-50 mt-10">
     <div class="grid flex-grow card rounded-box place-items-center">
-      <div v-if="user.role.role == 'Student'" class="card bg-base-300 shadow-xl ml-32 rounded-2xl" data-theme="corporate">
+      <div v-if="user.role == 'Student'" class="card bg-base-300 shadow-xl ml-32 rounded-2xl" data-theme="corporate">
         <div class="card-body card-bordered text-lg ">
           <h2 class="card-title">ข้อมูลส่วนตัว</h2>
           <h5 class="mb-1">รหัสนักศึกษา : {{ user.userID }}</h5>
@@ -9,7 +9,7 @@
             ชื่อ-นามสกุล : {{ user.name }} {{ user.surName }}
           </h5>
           <h5 class="mb-1">
-            ตำแหน่ง : {{ user.role.role == "Student" ? "นักศึกษา" : "" }}
+            ตำแหน่ง : {{ user.role == "Student" ? "นักศึกษา" : "" }}
           </h5>
           <h5 class="mb-1">
             สาขา : {{ user.major.majorName }}
@@ -24,28 +24,28 @@
             ชื่อ-นามสกุล : {{ user.name }} {{ user.surName }}
           </h5>
           <h5
-            v-if="user.role.role == 'Admin' || user.role.role == 'Teacher'"
+            v-if="user.role == 'Admin' || user.role == 'Teacher'"
             class="mb-1"
           >
             ตำแหน่ง :
-            {{ user.role.role == "Admin" ? "ผู้ดูแลระบบ" : "อาจารย์ผู้สอน" }}
+            {{ user.role == "Admin" ? "ผู้ดูแลระบบ" : "อาจารย์ผู้สอน" }}
           </h5>
           <h5
-            v-if="user.role.role == 'Officer' || user.role.role == 'Registrar'"
+            v-if="user.role == 'Officer' || user.role == 'Registrar'"
             class="mb-1"
           >
             ตำแหน่ง :
-            {{ user.role.role == "Officer" ? "เจ้าหน้าที่พนักงาน" : "นายทะเบียน" }}
+            {{ user.role == "Officer" ? "เจ้าหน้าที่พนักงาน" : "นายทะเบียน" }}
           </h5>
-          <h5 v-if="user.role.role == 'DirectorOfRegistration'" class="mb-1">
+          <h5 v-if="user.role == 'DirectorOfRegistration'" class="mb-1">
             ตำแหน่ง :
             {{
-              user.role.role == "DirectorOfRegistration"
+              user.role == "DirectorOfRegistration"
                 ? "ผู้อำนวยการสำนักส่งเสริมวิชาการและงานทะเบียน"
                 : ""
             }}
           </h5>
-          <h5 v-show="user.role.role != 'Admin'" class="mb-1">
+          <h5 v-show="user.role != 'Admin'" class="mb-1">
             ลายเซ็น : <img :src="user.sign"  class="bg-base-100 rounded-full"/>
           </h5>
         </div>
@@ -56,7 +56,7 @@
         <div class="card-body card-bordered text-lg" >
           <h2 class="card-title">จัดการข้อมูลส่วนตัว</h2>
           <form @submit="update(user._id)">
-            <div v-show="user.role.role != 'Registrar' && user.role.role != 'DirectorOfRegistration'" class="mb-3 form-floating">
+            <div v-show="user.role != 'Registrar' && user.role != 'DirectorOfRegistration'" class="mb-3 form-floating">
               <label>แจ้งเตือนผ่าน Line</label>
               <input
                 v-model="updateUser.lineToken.token"
@@ -65,7 +65,7 @@
                 placeholder="Line Token"
               />
             </div>
-            <div v-show="user.role.role != 'Admin' && user.role.role != 'Student'" class="mb-3 form-floating">
+            <div v-show="user.role != 'Admin' && user.role != 'Student'" class="mb-3 form-floating">
               <label>ลายเซ็น</label>
               <signature-pad
                 :modelValue="signatureFile"
@@ -97,6 +97,7 @@
       </div>
     </div>
   </div>
+  {{ user }}
 </template>
 
 <script>

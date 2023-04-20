@@ -48,7 +48,7 @@
               <div class="form-control text-black">
                 <label class="input-group input-group-vertical ">
                   <span>ชื่อรายวิชา</span>
-                  <VueMultiselect
+                  <Multiselect
                     v-model="formReq.requireInfo.sub_teach[0]"
                     :options="SubJ_Teach"
                     :custom-label="subjectWithLang"
@@ -59,7 +59,7 @@
                     class="text-black bg-white"
                     required
                   >
-                  </VueMultiselect>
+                  </Multiselect>
                 </label>
                 <label class="input-group input-group-vertical mt-6 ">
                   <span>สาเหตุที่ติด “I”</span>
@@ -116,11 +116,11 @@
 <script>
 import axios from "axios";
 import swal from "sweetalert2";
-import VueMultiselect from "vue-multiselect";
+import Multiselect from "vue-multiselect";
 
 export default {
   name: "FormWithdraw",
-  components: { VueMultiselect },
+  components: { Multiselect },
   data() {
     return {
       formReq: {

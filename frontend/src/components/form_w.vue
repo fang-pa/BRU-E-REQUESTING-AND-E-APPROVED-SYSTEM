@@ -99,7 +99,7 @@
                 </button>
                 <label class="input-group input-group-vertical">
                   <span>ชื่อรายวิชา</span>
-                  <VueMultiselect
+                  <Multiselect
                     v-model="PrePost"
                     :options="SubJ_Teach"
                     :custom-label="subjectWithLang"
@@ -110,7 +110,7 @@
                     class="text-neutral"
                     required
                   >
-                  </VueMultiselect>
+                  </Multiselect>
                 </label>
                 <label class="input-group input-group-vertical mt-6">
                   <span>เหตุผล</span>
@@ -142,11 +142,11 @@
 <script>
 import axios from "axios";
 import swal from "sweetalert2";
-import VueMultiselect from "vue-multiselect";
+import Multiselect from 'vue-multiselect'
 
 export default {
   name: "FormReq",
-  components: { VueMultiselect },
+  components: { Multiselect },
   data() {
     return {
       formReq: {
