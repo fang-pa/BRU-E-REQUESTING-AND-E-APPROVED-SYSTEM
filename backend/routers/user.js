@@ -58,7 +58,7 @@ router.post('/regis', async (req, res) => {
 
 router.get("/employee", async (req, res) => {
     try {
-        res.status(200).json(await Users.find({ role: { $ne: '63e302311b7d5e615a32000d' } }))
+        res.status(200).json(await Users.find({ role: { $ne: 'Student' } }))
     } catch (err) {
         console.log(err);
     }

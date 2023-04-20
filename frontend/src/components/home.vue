@@ -1,7 +1,7 @@
 <template>
   <div class="container-2xl text-center min-h-screen py-5">
     <div class="overflow-x-auto w-full">  
-    <h1 class="text-4xl mb-5 text-primary-content">รายการคำร้อง"</h1>
+    <h1 class="text-4xl mb-5 text-primary-content">รายการคำร้อง</h1>
     <div class="mb-5 justify-start flex ml-72">
     </div>  
       <table class="border-collapse mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">

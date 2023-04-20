@@ -134,10 +134,10 @@
                 <option
                   v-for="Roles in role"
                   :key="Roles._id"
-                  :value="Roles._id"
+                  :value="Roles.role"
                   selected
                 >
-                  {{ Roles.roleTh }}
+                  {{ Roles.role }}
                 </option>
               </select>
             </label>

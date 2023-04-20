@@ -106,17 +106,21 @@
             </div>
             <label class="input-group input-group-vertical">
               <span>สาขา</span>
-              <VueMultiselect
-                v-model="courses.major"
-                :options="MaJ"
-                :custom-label="MaJWithLang"
-                :close-on-select="true"
-                :clear-on-select="true"
-                placeholder="สาขา"
-                track-by="_id"
-                data-theme="light"
+              <select
+              v-model="courses.major"
+              class="select w-full max-w-xs bg-white text-black"
+              required
+            >
+              <option disabled selected>ตำแหน่งพนักงาน</option>
+              <option
+                v-for="Roles in MaJ"
+                :key="Roles._id"
+                :value="Roles.role"
+                selected
               >
-              </VueMultiselect>
+                {{ Roles.majorName }}
+              </option>
+            </select>
             </label>
             <div class="grid grid-cols-2 space-x-1">
               <div>
@@ -148,57 +152,17 @@
               <div>
                 <label class="input-group input-group-vertical">
                   <span>วันเปิดภาคการศึกษา</span>
-                  <v-date-picker
-                    v-model="courses.startTerm"
-                    :input-debounce="500"
-                    :timezone="Local"
-                    data-theme="light"
-                  >
-                    <template v-slot="{ inputValue, inputEvents }">
-                      <input
-                        id="floatingInput"
-                        placeholder="วันเปิดภาคการศึกษา"
-                        class="
-                          form-control
-                          bg-white
-                          border
-                          px-2
-                          py-1
-                          rounded
-                          w-full
-                        "
-                        :value="inputValue"
-                        v-on="inputEvents"
-                        required
-                      />
-                    </template>
-                  </v-date-picker>
+                  <input v-model="courses.startTerm" type="date" placeholder="วันเปิดภาคการศึกษา">
                 </label>
               </div>
               <div>
                 <label class="input-group input-group-vertical">
                   <span>วันปิดภาคการศึกษา</span>
-                  <v-date-picker
-                    v-model="courses.endTerm"
-                    :input-debounce="500"
-                    :timezone="Local"
-                    data-theme="light"
-                  >
-                    <template v-slot="{ inputValue, inputEvents }">
-                      <input
-                        id="floatingInput"
-                        placeholder="วันปิดภาคการศึกษา"
-                        class="form-control bg-white border px-2 py-1 w-full"
-                        :value="inputValue"
-                        v-on="inputEvents"
-                        required
-                      />
-                    </template>
-                  </v-date-picker>
+                  <input v-model="courses.endTerm" type="date" placeholder="วันเปิดภาคการศึกษา">
                 </label>
               </div>
             </div>
-            <label class="input-group input-group-vertical">
+            <!-- <label class="input-group input-group-vertical">
               <span>ชื่อรายวิชา</span>
               <VueMultiselect
                 v-model="PrePost.subject"
@@ -225,7 +189,7 @@
                 data-theme="light"
               >
               </VueMultiselect>
-            </label>
+            </label> -->
             <a class="rounded-full btn btn-info mb-2 ml-auto" @click="addPre()">
               เพิ่มแผนรายวิชา
             </a>
@@ -344,12 +308,12 @@
 <script>
 import axios from "axios";
 import swal from "sweetalert2";
-import VueMultiselect from "vue-multiselect";
+// import Multiselect from 'vue-multiselect'
 import moment from "moment";
 
 export default {
   name: "CoursE",
-  components: { VueMultiselect },
+  // components: { Multiselect },
   data() {
     return {
       courses: {
@@ -360,6 +324,8 @@ export default {
             teacher: "",
           },
         ],
+        startTerm: new Date(),
+        endTerm: new Date()
       },
       PrePost: {
         subject: {},
@@ -432,9 +398,6 @@ export default {
     },
     teacherWithLang({ name, surName }) {
       return `${name} ${surName}`;
-    },
-    MaJWithLang({ majorName }) {
-      return `${majorName}`;
     },
     async insertCourse() {
       const res = await axios.post("/data/create-course", this.courses);
