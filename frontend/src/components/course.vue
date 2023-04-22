@@ -106,21 +106,17 @@
             </div>
             <label class="input-group input-group-vertical">
               <span>สาขา</span>
-              <select
-              v-model="courses.major"
-              class="select w-full max-w-xs bg-white text-black"
-              required
-            >
-              <option disabled selected>ตำแหน่งพนักงาน</option>
-              <option
-                v-for="Roles in MaJ"
-                :key="Roles._id"
-                :value="Roles.role"
-                selected
+              <Multiselect
+                v-model="courses.major"
+                :options="MaJ"
+                :custom-label="MaJWithLang"
+                :close-on-select="true"
+                :clear-on-select="true"
+                placeholder="สาขา"
+                track-by="_id"
+                data-theme="light"
               >
-                {{ Roles.majorName }}
-              </option>
-            </select>
+              </Multiselect>
             </label>
             <div class="grid grid-cols-2 space-x-1">
               <div>
@@ -164,12 +160,7 @@
             </div>
             <label class="input-group input-group-vertical">
               <span>ชื่อรายวิชา</span>
-              <multiselect
-              v-model="PrePost.subject"
-              :options="this.options"
-              >
-            </multiselect>
-              <!-- <Multiselect
+              <Multiselect
                 v-model="PrePost.subject"
                 :options="SubJ"
                 :custom-label="subjectWithLang"
@@ -192,8 +183,9 @@
                 placeholder="ชื่ออาจารย์"
                 track-by="_id"
                 data-theme="light"
+                
               >
-              </Multiselect> -->
+              </Multiselect>
             </label>
             <a class="rounded-full btn btn-info mb-2 ml-auto" @click="addPre()">
               เพิ่มแผนรายวิชา
@@ -321,7 +313,6 @@ export default {
   components: { Multiselect },
   data() {
     return {
-      options: ['list', 'of', 'options'],
       courses: {
         major: "",
         course: [
@@ -405,6 +396,9 @@ export default {
     teacherWithLang({ name, surName }) {
       return `${name} ${surName}`;
     },
+    MaJWithLang({ majorName }) {
+      return `${majorName}`;
+    },
     async insertCourse() {
       const res = await axios.post("/data/create-course", this.courses);
       if (res.status == 200) {
@@ -434,32 +428,4 @@ export default {
   },
 };
 </script>
-
-<style src="vue-multiselect/dist/vue-multiselect.min.css" scoped >
-
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 10px;
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-}
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
-
-.form-signin input[type="text"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-</style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
