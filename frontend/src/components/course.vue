@@ -106,17 +106,21 @@
             </div>
             <label class="input-group input-group-vertical">
               <span>สาขา</span>
-              <Multiselect
-                v-model="courses.major"
-                :options="MaJ"
-                :custom-label="MaJWithLang"
-                :close-on-select="true"
-                :clear-on-select="true"
-                placeholder="สาขา"
-                track-by="_id"
-                data-theme="light"
+              <select
+              v-model="courses.major"
+              class="select w-full max-w-xs bg-white text-black"
+              required
+            >
+              <option disabled selected>สาขา</option>
+              <option
+                v-for="MaJor in MaJ"
+                :key="MaJor._id"
+                :value="MaJor._id"
+                selected
               >
-              </Multiselect>
+                {{ MaJor.majorName }}
+              </option>
+            </select>
             </label>
             <div class="grid grid-cols-2 space-x-1">
               <div>
@@ -160,32 +164,39 @@
             </div>
             <label class="input-group input-group-vertical">
               <span>ชื่อรายวิชา</span>
-              <Multiselect
-                v-model="PrePost.subject"
-                :options="SubJ"
-                :custom-label="subjectWithLang"
-                :close-on-select="true"
-                :clear-on-select="false"
-                placeholder="รายวิชา"
-                track-by="_id"
-                data-theme="light"
+              <select
+              v-model="PrePost.subject"
+              class="select w-full max-w-xs bg-white text-black"
+              required
+            >
+              <option disabled selected>ชื่อรายวิชา</option>
+              <option
+                v-for="SubJect in SubJ"
+                :key="SubJect._id"
+                :value="SubJect._id"
+                selected
               >
-              </Multiselect>
+                {{ SubJect.SubJName }}
+              </option>
+            </select>
             </label>
             <label class="input-group input-group-vertical">
               <span>ชื่ออาจารย์</span>
-              <Multiselect
-                v-model="PrePost.teacher"
-                :options="Teach"
-                :custom-label="teacherWithLang"
-                :close-on-select="true"
-                :clear-on-select="false"
-                placeholder="ชื่ออาจารย์"
-                track-by="_id"
-                data-theme="light"
-                
+              <select
+              v-model="PrePost.teacher"
+              class="select w-full max-w-xs bg-white text-black"
+              required
+            >
+              <option disabled selected>ชื่ออาจารย์</option>
+              <option
+                v-for="Teachers in Teach"
+                :key="Teachers._id"
+                :value="Teachers._id"
+                selected
               >
-              </Multiselect>
+                {{ Teachers.name }} {{ Teachers.surName }}
+              </option>
+            </select>
             </label>
             <a class="rounded-full btn btn-info mb-2 ml-auto" @click="addPre()">
               เพิ่มแผนรายวิชา
@@ -305,12 +316,10 @@
 <script>
 import axios from "axios";
 import swal from "sweetalert2";
-import Multiselect from 'vue-multiselect'
 import moment from "moment";
 
 export default {
   name: "CoursE",
-  components: { Multiselect },
   data() {
     return {
       courses: {
@@ -390,15 +399,6 @@ export default {
         this.courseDetail = res.data;
       }
     },
-    subjectWithLang({ SubJID, SubJName, SubJSec }) {
-      return `${SubJID} Sec[ ${SubJSec} ] [ ${SubJName} ]`;
-    },
-    teacherWithLang({ name, surName }) {
-      return `${name} ${surName}`;
-    },
-    MaJWithLang({ majorName }) {
-      return `${majorName}`;
-    },
     async insertCourse() {
       const res = await axios.post("/data/create-course", this.courses);
       if (res.status == 200) {
@@ -428,4 +428,3 @@ export default {
   },
 };
 </script>
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

@@ -111,7 +111,7 @@ router.put("/update-employee/:id", async (req, res) => {
 
 router.get("/teacher", async (req, res) => {
     try {
-        res.json(await Users.find({ role: '62ed35de4de962dfd7250b82' }))
+        res.json(await Users.find({ role: 'Teacher'  }))
     } catch (err) {
         console.log(err);
     }

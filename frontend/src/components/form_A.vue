@@ -137,18 +137,21 @@
                 </button>
                 <label class="input-group input-group-vertical">
                   <span>ชื่อรายวิชา</span>
-                  <Multiselect
-                    v-model="PrePost.subject"
-                    :options="SubJ"
-                    :custom-label="subjectWithLang"
-                    :close-on-select="true"
-                    :clear-on-select="true"
-                    placeholder="รายวิชา"
-                    track-by="_id"
-                    data-theme="light"
-                    required
+                  <select
+                  v-model="PrePost.subject"
+                  class="select w-full max-w-xs bg-white text-black"
+                  required
+                >
+                  <option disabled selected>ชื่อรายวิชา</option>
+                  <option
+                    v-for="SubJect in SubJ"
+                    :key="SubJect._id"
+                    :value="SubJect._id"
+                    selected
                   >
-                  </Multiselect>
+                    {{ SubJect.SubJName }}
+                  </option>
+                </select>
                 </label>
                 <label class="input-group input-group-vertical mt-6">
                   <span>เหตุผล</span>
@@ -181,11 +184,9 @@
 <script>
 import axios from "axios";
 import swal from "sweetalert2";
-import Multiselect from 'vue-multiselect'
 
 export default {
   name: "FormReq",
-  components: { Multiselect },
   data() {
     return {
       formReq: {
@@ -250,9 +251,6 @@ export default {
     this.requireInfo.sub_teach.splice(0, 1);
   },
   methods: {
-    subjectWithLang(sub) {
-      return `${sub.SubJID} ${sub.SubJName}`;
-    },
     nameDateTH(name) {
       const dayNames = [
         "sunday",
@@ -343,4 +341,3 @@ export default {
 };
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
