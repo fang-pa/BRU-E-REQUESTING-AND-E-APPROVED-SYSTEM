@@ -56,11 +56,12 @@
                   <option disabled selected>ชื่อรายวิชา</option>
                   <option
                     v-for="SubJect in SubJ_Teach"
+                    @change="pushvalue(SubJect.subject._id,SubJect.teacher._id)"
                     :key="SubJect._id"
-                    :value="SubJect._id"
+                    :value="SubJect.subject._id"
                     selected
                   >
-                    {{ SubJect.SubJName }}
+                    {{ SubJect.subject.SubJName }}
                   </option>
                 </select>
                 </label>
@@ -113,6 +114,7 @@
         </div>
       </div>
     </div>
+    {{ SubJ_Teach }}
   </div>
 </template>
 
@@ -170,6 +172,9 @@ export default {
     });
   },
   methods: {
+    async pushvalue(){
+        
+    },
     async insertFormRequest() {
       try {
         this.formReq.studentInfo = this.user._id

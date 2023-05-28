@@ -12,7 +12,7 @@ router.post('/login', async (req, res) => {
         const { userID, password } = req.body
         const user = await Users.findOne({ userID })
         if (user && (await bcrypt.compare(password, user.password))) {
-            if (user.role.role == 'Student') {
+            if (user.role == 'Student') {
                 user.token = jwt.sign(
                     { _id: user._id, userID: userID, name: user.name, surname: user.surName, role: user.role, major: user.major._id, dateTime: new Date(Date.now()), classOf: user.classOf },
                     "" + process.env.JWT_KEY,
